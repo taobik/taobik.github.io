@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">
+        <img width="50px" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="">
+    </a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Tài khoản</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Giỏ hàng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Thông báo</a>
+            </li>
+        </ul>
+    </div>
+    <form class="form-inline" action="/action_page.php">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+</nav>
+</body>
+</html>
