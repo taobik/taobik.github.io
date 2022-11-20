@@ -1,6 +1,12 @@
 body{
     background-color: lightblue;
 }
+
 h1{
     text-align: center;
 }
+
+#carouselExampleIndicators{
+    margin: 30px 150px;
+}
+
