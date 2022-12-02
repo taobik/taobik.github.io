@@ -1,7 +1,10 @@
 {% extends 'layout/base.html' %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
 
 {% block body %}
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -26,5 +29,26 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<div class="body">
+    <div class="hot">
+        <h2>SẢN PHẨM NỔI BẬT</h2>
+        <div class="row">
+            {% for x in sach %}
+            <div class="col-md-3 col-xs-12">
+                <div class="card">
+                    <a href="{{ url_for('chitiet', id_sp=x.id) }}"><img class="card-img-top" src="{{ url_for('static', filename=x.hinh_anh) }}" alt="Card image"
+                         style="height: 300px"></a>
+                    <div class="card-body">
+                        <a href="{{ url_for('chitiet', id_sp=x.id) }}" style="color: black"><h4 class="card-title" style="font-size: 15px;">{{ x.name }}</h4></a>
+                        <p class="card-text">{{ "{:0,.1f}".format(x.gia) }} VNĐ</p>
+                        <a href="#" class="btn btn-primary stretched-link">Đặt hàng</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'layout/base.html' %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/chitiet.css') }}">
+{% endblock %}
+{% block body %}
+{% for x in sp %}
+<div class="body">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 body-header">
+            <img src="{{ url_for('static', filename=x[2]) }}" alt="{{ sp[1] }}">
+        </div>
+        <div class="col-md-5 col-sm-6 body-body">
+            <h4 class="bottom">{{ x[0] }}</h4>
+            <table class="bottom">
+                <tr >
+                    <th>
+                        Tình trạng:
+                        {% if x[4] != True %}
+                        <span>Còn hàng</span>
+                        {% else %}
+                        <span>Đã hết</span>
+                        {% endif %}
+                    </th>
+                    <th>
+                        Thể loại: <span>{{ x[6] }}</span>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Tác giả: <span>{{ x[7] }}</span>
+                    </td>
+                    <td>
+                        Nhà Xuất Bản: <span>{{ x[8] }}</span>
+                    </td>
+                </tr>
+            </table>
+            <h3 class="bottom">{{ "{:,.0f}".format(x[3]) }} VNĐ</h3>
+            <button type="button" class="btn btn-warning">Bỏ vào giỏ hàng</button>
+        </div>
+        <div class="col-md-3 col-sm-6 body-body">
+            <h5>SẢN PHẨM CÙNG THỂ LOẠI</h5>
+            {% for p in sach %}
+            {% if p.the_loai_id == x[5] and p.hinh_anh != x[2]%}
+            <a href="{{ url_for('chitiet', id_sp=p.id) }}">
+                <div class="row">
+                    <div class="col-md-4 body-body-img">
+                        <img src="{{ url_for('static', filename=p.hinh_anh) }}" alt="{{ x.name }}">
+                    </div>
+                    <div class="col-md-8 body-body-info">
+                        <h6>{{ p.name }}</h6>
+                        <p>{{ "{:,.0f}".format(p.gia) }} VNĐ</p>
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

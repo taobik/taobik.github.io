@@ -1,0 +1,29 @@
+.body{
+    margin: 50px 10% auto;
+}
+
+.body-danhmuc{
+    margin-right:5%;
+}
+
+.list-group-item a{
+    color: black;
+}
+
+h2{
+ font-size: 20px;
+ text-transform: uppercase
+}
+
+.list-group button{
+    text-align: unset;
+    padding:10px 20px;
+}
+
+.list-item{
+    margin-left: 20px;
+}
+.card-body>a{
+    color: black;
+    text-decoration: none;
+}

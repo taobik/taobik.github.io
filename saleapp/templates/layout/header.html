@@ -3,28 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
 <body>
+<div>
+    <ul class="nav justify-content-end">
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">
+                <i class="bi bi-person-fill"></i>
+                {{ current_user.name }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('dangxuat') }}">
+                <i class="bi bi-box-arrow-right"></i>
+                Đăng xuất
+            </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('dangky') }}">
+                <i class="bi bi-person-fill-add"></i>
+                Đăng kí
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('dangnhap') }}">
+                <i class="bi bi-lock-fill"></i>
+                Đăng nhập
+            </a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="bi bi-bag-check-fill"></i>
+                Thanh toán
+            </a>
+        </li>
+    </ul>
+</div>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
         <img width="50px" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="">
     </a>
-
-    <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Tài khoản</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Giỏ hàng</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Sản phẩm</a>
+                <a class="nav-link" href="{{ url_for('san_pham') }}">Sản phẩm</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Thông báo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Giỏ hàng <span class="badge badge-light">0</span>
+                </a>
             </li>
         </ul>
     </div>

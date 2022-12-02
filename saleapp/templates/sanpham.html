@@ -1,0 +1,54 @@
+{% extends 'layout/base.html' %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sanpham.css') }}">
+{% endblock %}
+{% block body %}
+<div class="body">
+    <div class="row">
+        <div class="container-sm col-sm-2">
+            <h2>Danh mục</h2>
+            <div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="{{ url_for('san_pham') }}">Tất cả</a></li>
+                    <button type="button" class="btn btn-outline-light text-dark" data-toggle="collapse"
+                            data-target="#list">
+                        Thể loại
+                    </button>
+                    <div id="list" class="collapse">
+                        {% for p in soluongtl %}
+                        <li class="list-group-item list-item">
+                            <a href="{{ url_for('san_pham', the_loai_id = p[0]) }}">{{ p[1] }}
+                                <span class="badge badge-light">{{ p[2] }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </div>
+                    <li class="list-group-item"><a href="{{ url_for('san_pham') }}">Giới thiệu</a></li>
+                    <li class="list-group-item"><a href="{{ url_for('san_pham') }}">Tin tức</a></li>
+                    <li class="list-group-item"><a href="{{ url_for('san_pham') }}">Liên hệ</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="container-md col-sm-10 ">
+            <h2>Tất cả sản phẩm</h2>
+            <div class="row">
+                {% for x in sach %}
+                <div class="col-md-3 col-xs-12">
+                    <div class="card">
+                        <a href="{{ url_for('chitiet', id_sp = x.id) }}"><img class="card-img-top" src="{{ url_for('static', filename=x.hinh_anh) }}"
+                                        alt="Card image"
+                                        style="height: 300px"></a>
+                        <div class="card-body">
+                            <a href=""><h4 class="card-title" style="font-size: 15px;">{{ x.name }}</h4></a>
+                            <p class="card-text">{{ "{:0,.1f}".format(x.gia) }} VNĐ</p>
+                            <a href="#" class="btn btn-primary">Đặt hàng</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

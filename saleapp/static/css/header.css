@@ -1,0 +1,14 @@
+.nav{
+    height: 30px;
+    background-color: black;
+}
+.nav>li{
+    margin:-5px 3px;
+}
+.nav>li>a{
+    padding: 7px;
+    color: white
+}
+.nav>.nav-item{
+    display: flex
+}

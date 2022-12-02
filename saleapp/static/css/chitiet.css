@@ -1,0 +1,42 @@
+.bottom{
+    margin-bottom: 30px
+}
+.body{
+    margin: 5%;
+}
+.body-header>img{
+    width: 400px;
+}
+.body-body{
+    margin-top: 10px
+}
+.body-body>a{
+    color: black;
+    text-decoration: none;
+}
+.body-body>h5{
+    border-bottom: 2px solid black;
+    padding-bottom: 15px;
+}
+span{
+    color: red;
+}
+th{
+    padding: 0 20px;
+}
+th:first-child{
+    border-right: 1px solid black;
+    padding-left: 0px
+}
+.body-body>h3{
+    margin: 10px 0;
+}
+.row{
+    margin-top: 20px;
+}
+.body-body-img{
+     padding: 0;
+}
+.body-body-img>img{
+    width: 140px;
+}
