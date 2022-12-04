@@ -1,0 +1,40 @@
+{% extends 'layout/base.html' %}
+{% block title %}Giỏ hàng{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+{% endblock %}
+{% block body %}
+<h4>Giỏ Hàng</h4>
+{% if 'cart' in session and session['cart'] %}
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Ma san pham</th>
+            <th>Ten san pham</th>
+            <th>Don gia</th>
+            <th>So luong</th>
+        </tr>
+        {% for x in session['cart'].values() %}
+        <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.name }}</td>
+            <td>{{ x.gia }}</td>
+            <td>{{ x.so_luong }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="alert alert-info">
+        <h5>Tổng sản phẩm: {{ cart_stats.total_quantity }}</h5>
+        <h5>Tổng tiền: {{ "{:,.0f}".format(st.total_amount) }} VNĐ</h5>
+    </div>
+    {% if current_user.is_authenticated %}
+    <input type="button" value="Thanh toán" class="btn btn-danger" onclick="pay()">
+    {% else %}
+    <a href="{{ url_for('dangnhap', next='gio_hang') }}">Đăng nhập để thanh toán!!</a>
+    {% endif %}
+    <br><br>
+    {% else %}
+    <p><i>Giỏ hàng đã được thanh toán hoặc chưa thêm sản phẩm!!!</i></p>
+    {% endif %}
+</div>
+{% endblock %}

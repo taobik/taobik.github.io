@@ -1,12 +1,13 @@
 {% extends 'layout/base.html' %}
-
+{% block title %}Đăng ký{% endblock %}
 {% block body %}
 <div class="container" style="margin-top:50px;">
     <h5>ĐĂNG KÝ TÀI KHOẢN</h5>
     {% if err_msg %}
     <div>
-        <div class="alert alert-danger">
-            <strong>{{ err_msg }}</strong> Hãy thử lại!!
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{ err_msg }} !! Hãy thử lại</strong>
         </div>
     </div>
     {% endif %}

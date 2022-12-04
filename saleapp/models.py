@@ -55,17 +55,19 @@ class Sach(BaseModel):
     gia = Column(Float, default=0)
     hinh_anh = Column(String(100))
     trang_thai = Column(Boolean, default=True)
+    da_ban = Column(Integer, nullable=False)
     so_luong_ton = Column(Integer, nullable=False)
     the_loai_id = Column(Integer, ForeignKey(TheLoai.id), nullable=False)
     tac_gia_id = Column(Integer, ForeignKey(TacGia.id), nullable=False)
     nha_xuat_ban_id = Column(Integer, ForeignKey(NhaXuatBan.id), nullable=False)
+    receipt_details = relationship('ReceiptDetail', backref='sach', lazy=True)
 
     def __str__(self):
         return self.name
 
 
 class User(BaseModel, UserMixin):
-    __tablename__= 'user'
+    __tablename__ = 'user'
 
     name = Column(String(50), nullable=False)
     email = Column(String(50), nullable=False)
@@ -75,9 +77,23 @@ class User(BaseModel, UserMixin):
     trang_thai = Column(Boolean, default=True)
     ngay_them = Column(DateTime, default=datetime.now())
     vai_tro = Column(Enum(UserRole), default=UserRole.normal_user)
+    receipts = relationship('Receipt', backref='user', lazy=True)
 
     def __str__(self):
         return self.name
+
+
+class Receipt(BaseModel):
+    ngay_tao = Column(DateTime, default=datetime.now())
+    user_id = Column(Integer, ForeignKey(User.id), nullable=False)
+    details = relationship('ReceiptDetail', backref='receipt', lazy=True)
+
+
+class ReceiptDetail(db.Model):
+    so_luong = Column(Integer, default=0)
+    don_gia = Column(Float, default=0)
+    sach_id = Column(Integer, ForeignKey(Sach.id), nullable=False, primary_key=True)
+    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False, primary_key=True)
 
 
 if __name__ == '__main__':

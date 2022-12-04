@@ -1,16 +1,17 @@
 {% extends 'layout/base.html' %}
-
+{% block title %}Đăng nhập{% endblock %}
 {% block body %}
 <div class="container" style="margin-top:50px;">
     <h5>ĐĂNG NHẬP</h5>
     {% if err_msg %}
     <div>
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>{{ err_msg }}</strong>
         </div>
     </div>
     {% endif %}
-    <form method="post" action="{{ url_for('dangnhap') }}">
+    <form method="post">
         <div class="form-group">
             <label for="username">Tên đăng nhập:</label>
             <input type="text" class="form-control" placeholder="Nhập tên đăng nhập..." id="username"

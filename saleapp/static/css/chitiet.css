@@ -2,7 +2,7 @@
     margin-bottom: 30px
 }
 .body{
-    margin: 5%;
+    margin: 50px 5%;
 }
 .body-header>img{
     width: 400px;
@@ -39,4 +39,14 @@ th:first-child{
 }
 .body-body-img>img{
     width: 140px;
+}
+.body-body-info{
+    display: flex
+}
+ul{
+    padding-left: 0;
+    list-style-type: none;
+}
+ul+ul{
+    margin-left: 40px;
 }
