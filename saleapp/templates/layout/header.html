@@ -11,8 +11,12 @@
     <ul class="nav justify-content-end">
         {% if current_user.is_authenticated %}
         <li class="nav-item">
+            <a class="nav-link" href="#">
+                <img class="mg-fluid" src="{{ current_user.avatar }}" alt="" style="width: 40px">
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ url_for('home') }}">
-                <i class="bi bi-person-fill"></i>
                 {{ current_user.name }}
             </a>
         </li>
@@ -37,7 +41,7 @@
         </li>
         {% endif %}
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ url_for('gio_hang') }}">
                 <i class="bi bi-bag-check-fill"></i>
                 Thanh toán
             </a>
@@ -46,7 +50,7 @@
 </div>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" href="/">
-        <img width="50px" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="">
+        <img width="50px" src="https://res.cloudinary.com/dascseee2/image/upload/v1670522880/logo_oqh6lv.jpg" alt="">
     </a>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
@@ -58,7 +62,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('gio_hang') }}">
-                    Giỏ hàng <span class="badge badge-light" id="gio">{{ cart_stats.total_quantity }}</span>
+                    Giỏ hàng <span class="badge badge-light gio">{{ cart_stats.total_quantity }}</span>
                 </a>
             </li>
         </ul>

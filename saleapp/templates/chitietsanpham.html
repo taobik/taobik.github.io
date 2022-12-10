@@ -5,51 +5,81 @@
 {% endblock %}
 {% block body %}
 {% for x in sp %}
-<div class="body ">
+<div class="body">
     <div class="row">
-        <div class="col-sm-3 body-header" style="min-width:335px">
-            <img src="{{ url_for('static', filename=x[2]) }}" alt="{{ sp[1] }}">
-        </div>
-        <div class="col body-body" style="min-width:400px">
-            <h4 class="bottom">{{ x[0] }}</h4>
-            <div class="body-body-info">
-                <ul>
-                    <li>
-                        Tình trạng:
-                        {% if x[4] != True %}
-                        <span>Còn hàng</span>
-                        {% else %}
-                        <span>Đã hết</span>
-                        {% endif %}
-                    </li>
-                    <li>
-                        Thể loại: <span>{{ x[6] }}</span>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        Tác giả: <span>{{ x[7] }}</span>
-                    </li>
-                    <li>
-                        Nhà Xuất Bản: <span>{{ x[8] }}</span>
-                    </li>
-                </ul>
+        <div class="col-md-8 col-sm-6">
+            <div class="row">
+                <div class="col-md-3 body-header" style="min-width:335px">
+                    <img src="{{ x[2] }}" alt="{{ x[1] }}">
+                </div>
+                <div class="col body-body" style="min-width:400px">
+                    <h4 class="bottom">{{ x[0] }}</h4>
+                    <div class="body-body-info">
+                        <ul>
+                            <li>
+                                Tình trạng:
+                                {% if x[4] != True %}
+                                <span>Còn hàng</span>
+                                {% else %}
+                                <span>Đã hết</span>
+                                {% endif %}
+                            </li>
+                            <li>
+                                Thể loại: <span>{{ x[6] }}</span>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                Tác giả: <span>{{ x[7] }}</span>
+                            </li>
+                            <li>
+                                Nhà Xuất Bản: <span>{{ x[8] }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="bottom">{{ "{:,.0f}".format(x[3]) }} VNĐ</h3>
+                    <button type="button" class="btn btn-warning" onclick="them_hang({{ x[1] }}, '{{ x[0] }}', {{ x[3] }})">Bỏ vào giỏ hàng</button>
+                </div>
             </div>
-            <h3 class="bottom">{{ "{:,.0f}".format(x[3]) }} VNĐ</h3>
-            <button type="button" class="btn btn-warning">Bỏ vào giỏ hàng</button>
+            <hr>
+            <div class="container-fluid">
+                BÌNH LUẬN SẢN PHẨM
+            </div>
+            {% if current_user.is_authenticated %}
+            <div class="container-fluid">
+                <div class="form-group">
+                    <textarea id="comment-content" class="form-control" placeholder="Nội dung bình luận"></textarea>
+                </div>
+                <div class="mt-1">
+                    <input type="button" onclick="addComment({{ x[1] }})" value="Thêm bình luận"
+                           class="btn btn-info"/>
+                </div>
+            </div>
+            {% else %}
+            <div class="container-fluid">
+                <p>Vui lòng <a href="/danhnhap?next=/chitietsanpham/{{ x[1] }}">đăng nhập</a> để bình luận!</p>
+            </div>
+            {% endif %}
+
+            <div class="spinner-grow text-primary my-spinner"></div>
+            <ul class="list-group mt-2" id="comments"></ul>
+
         </div>
-        <div class="col-sm-4 body-body" style="min-width:300px">
+        <div class="col-md-4 col-sm7 body-body" style="min-width:300px">
             <h5>SẢN PHẨM CÙNG THỂ LOẠI</h5>
             {% for p in sach %}
             {% if p.the_loai_id == x[5] and p.hinh_anh != x[2]%}
             <a href="{{ url_for('chitiet', id_sp=p.id) }}">
                 <div class="row">
                     <div class="col-md-3 body-body-img" style="min-width:110px">
-                        <img src="{{ url_for('static', filename=p.hinh_anh) }}" alt="{{ x.name }}">
+                        <img src="{{ p.hinh_anh }}" alt="{{ p.name }}">
                     </div>
                     <div class="col body-body-info">
-                        <h6>{{ p.name }}</h6>
-                        <p>{{ "{:,.0f}".format(p.gia) }} VNĐ</p>
+                        <ul>
+                            <li>{{ p.name }}</li>
+                            <hr style="visibility: hidden;">
+                            <li style="color: blue">{{ "{:,.0f}".format(p.gia) }} VNĐ</li>
+                        </ul>
                     </div>
                 </div>
             </a>
@@ -58,5 +88,11 @@
         </div>
     </div>
 </div>
+<script src="{{ url_for('static', filename='js/comment.js') }}"></script>
+<script>
+    window.onload = function() {
+        loadComments({{ x[1] }})
+    }
+</script>
 {% endfor %}
 {% endblock %}

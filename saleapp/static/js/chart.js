@@ -23,18 +23,44 @@ function drawCateStats(labels, data, color) {
   });
 }
 
-function drawRevenueStats(labels, data) {
-const ctx = document.getElementById('revenueStats');
+function drawCateStats2(labels, data, color) {
+ const ctx = document.getElementById('myChart2');
 
   new Chart(ctx, {
     type: 'bar',
     data: {
       labels: labels,
       datasets: [{
-        label: 'Doanh thu',
+        label: 'Doanh thu theo sách',
         data: data,
-        borderWidth: 1,
-        backgroundColor: ['red', 'green', 'blue', 'gold', 'rgba(135, 156, 150, 0.7)']
+        backgroundColor: color,
+        borderColor: color,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+function drawCateStats3(labels, data, color) {
+ const ctx = document.getElementById('myChart3');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Doanh thu theo sách',
+        data: data,
+        backgroundColor: color,
+        borderColor: color,
+        borderWidth: 1
       }]
     },
     options: {

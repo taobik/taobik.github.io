@@ -1,0 +1,174 @@
+{% extends 'admin/base.html' %}
+{% block body %}
+{% block css %}
+<style>
+    .muc{
+        display: none;
+    }
+    .active{
+        display: block;
+    }
+</style>
+{% endblock %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <button class="btn nav-link" onclick="chuyen('muc1')">Theo sách</button>
+        </li>
+        <li class="nav-item">
+            <button class="btn nav-link" onclick="chuyen('muc2')">Theo thể loại</button>
+        </li>
+    </ul>
+</nav>
+
+<div id="muc1" class="muc container-fluid active" style="padding-top:70px;padding-bottom:70px;">
+    <h1>Thống kê sách</h1>
+    <div class="row">
+        <div class="col">
+            <form>
+                <div class="form-group">
+                    <label for="kw">Nhập từ khóa:</label>
+                    <input type="text" class="form-control" name="kw" id="kw">
+                </div>
+                <div class="form-group">
+                    <label for="from_date">Chọn ngày bắt đầu:</label>
+                    <input type="date" class="form-control" name="from_date" id="from_date">
+                </div>
+                <div class="form-group">
+                    <label for="to_date">Chọn ngày kết thúc:</label>
+                    <input type="date" class="form-control" name="to_date" id="to_date">
+                </div>
+                <button type="submit" class="btn btn-primary">Lọc</button>
+            </form>
+            <div>
+                 <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sách</th>
+                    <th>Doanh thu</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in sach %}
+                <tr>
+                    <td>{{ x[0] }}</td>
+                    <td>{{ x[1] }}</td>
+                    {% if x[2] == None %}
+                    <td>0 VNĐ</td>
+                    {% else %}
+                    <td>{{ "{:0,.0f}".format(x[2]) }} VNĐ</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="muc2" class="muc container-fluid " style="padding-top:70px;padding-bottom:70px;">
+    <h1>Thống kê thể loại</h1>
+    <div class="row">
+        <div class="col">
+            <form>
+                <div class="form-group">
+                    <label for="kwtl">Nhập từ khóa:</label>
+                    <input type="text" class="form-control" name="kwtl" id="kwtl">
+                </div>
+                <div class="form-group">
+                    <label for="from_datetl">Chọn ngày bắt đầu:</label>
+                    <input type="date" class="form-control" name="from_datetl" id="from_datetl">
+                </div>
+                <div class="form-group">
+                    <label for="to_datetl">Chọn ngày kết thúc:</label>
+                    <input type="date" class="form-control" name="to_datetl" id="to_datetl">
+                </div>
+                <button type="submit" class="btn btn-primary">Lọc</button>
+            </form>
+            <div>
+                <canvas id="myChart3"></canvas>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sách</th>
+                    <th>Doanh thu</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for x in tl %}
+                <tr>
+                    <td>{{ x[0] }}</td>
+                    <td>{{ x[1] }}</td>
+                    {% if x[2] == None %}
+                    <td>0 VNĐ</td>
+                    {% else %}
+                    <td>{{ "{:0,.0f}".format(x[2]) }} VNĐ</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+<script>
+    let data = [], labels=[], color = [];
+    {% for s in sach %}
+    {% if s[2] == None %}
+        data.push('0')
+    {% else %}
+        data.push({{ s[2] }})
+    {% endif %}
+    labels.push('{{ s[1] }}')
+
+    r = Math.random()*255
+    g = Math.random()*255
+    b = Math.random()*255
+
+    color.push(`rgba(${r},${g},${b},0.7)`)
+    {% endfor %}
+
+
+    let data1 = [], labels1=[], color1 = [];
+    {% for s in tl %}
+    {% if s[2] == None %}
+        data1.push('0')
+    {% else %}
+        data1.push({{ s[2] }})
+    {% endif %}
+    labels1.push('{{ s[1] }}')
+
+    r = Math.random()*255
+    g = Math.random()*255
+    b = Math.random()*255
+
+    color1.push(`rgba(${r},${g},${b},0.7)`)
+    {% endfor %}
+
+    window.onload = function() {
+        drawCateStats2(labels, data, color)
+        drawCateStats3(labels1, data1, color1)
+    }
+
+    function chuyen(a){
+
+        m = document.getElementsByClassName('muc')
+        for(let i = 0; i<m.length;i++){
+            m[i].classList.remove("active")
+       }
+        n = document.getElementById(a)
+        n.classList.add("active");
+    }
+</script>
+{% endblock %}

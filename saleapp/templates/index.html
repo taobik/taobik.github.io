@@ -39,28 +39,89 @@
     </a>
 </div>
 <div class="body">
-    <div class="hot">
-        <h2>SẢN PHẨM NỔI BẬT</h2>
-        <div class="row">
-            {% for x in sach %}
-            <div class="col-md-3 col-xs-12">
-                <div class="card">
-                    <a href="{{ url_for('chitiet', id_sp=x.id) }}"><img class="card-img-top"
-                                                                        src="{{ url_for('static', filename=x.hinh_anh) }}"
-                                                                        alt="Card image"></a>
-                    <div class="card-body">
-                        <a href="{{ url_for('chitiet', id_sp=x.id) }}" style="color: black"><h4 class="card-title"
-                                                                                                style="font-size: 15px;">
-                            {{ x.name }}</h4></a>
-                        <p class="card-text">{{ "{:0,.1f}".format(x.gia) }} VNĐ</p>
-                        <a href="#" class="btn btn-primary stretched-link" onclick="them_hang({{ x.id }}, '{{ x.name }}', {{ x.gia }})">Đặt hàng</a>
+    <div class="row hot">
+        <div class="title col-md-8">
+            <ul>
+                <li><h4>SẢN PHẨM NỔI BẬT</h4></li>
+                <li style="margin-right: 90px">
+                    <a href="{{ url_for('san_pham') }}">
+                        <i>Xem tất cả</i>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="row">
+                {% for x in max_sach %}
+                <div class="card-deck col-md-3 col-xs-12">
+                    <div class="card" style="margin-bottom: 50px">
+                        <a href="{{ url_for('chitiet', id_sp=x.id) }}"><img class="card-img-top"
+                                                                            src="{{ x.hinh_anh }}"
+                                                                            alt="Card image"></a>
+                        <div class="card-body">
+                            <a href="{{ url_for('chitiet', id_sp=x.id) }}" style="color: black"><h4 class="card-title"
+                                                                                                    style="font-size: 15px;">
+                                {{ x.name }}</h4></a>
+                            <p class="card-text">{{ "{:0,.1f}".format(x.gia) }} VNĐ</p>
+                            <a href="#" class="btn btn-primary stretched-link"
+                               onclick="them_hang({{ x.id }}, '{{ x.name }}', {{ x.gia }})">Đặt hàng</a>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
+
+            <ul>
+                <li><h4>SẢN PHẨM BÁN NHIỀU</h4></li>
+                <li style="margin-right: 90px">
+                    <a href="{{ url_for('san_pham') }}">
+                        <i>Xem tất cả</i>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="row">
+                {% for x in min_sach %}
+                <div class="card-deck col-md-3 col-xs-12">
+                    <div class="card" style="margin-bottom: 50px">
+                        <a href="{{ url_for('chitiet', id_sp=x.id) }}"><img class="card-img-top"
+                                                                            src="{{ x.hinh_anh }}"
+                                                                            alt="Card image"></a>
+                        <div class="card-body">
+                            <a href="{{ url_for('chitiet', id_sp=x.id) }}" style="color: black"><h4 class="card-title"
+                                                                                                    style="font-size: 15px;">
+                                {{ x.name }}</h4></a>
+                            <p class="card-text">{{ "{:0,.1f}".format(x.gia) }} VNĐ</p>
+                            <a href="#" class="btn btn-primary stretched-link"
+                               onclick="them_hang({{ x.id }}, '{{ x.name }}', {{ x.gia }})">Đặt hàng</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-4 dondoc">
+            <h4>CÙNG ĐÓN ĐỌC</h4>
+            <hr>
+            {% for p in ton %}
+            <a href="{{ url_for('chitiet', id_sp=p.id) }}">
+                <div class="row">
+                    <div class="col-md-3 body-body-img" style="min-width:110px">
+                        <img src="{{ p.hinh_anh }}" alt="{{ p.name }}">
+                    </div>
+                    <div class="col body-body-info">
+                        <ul>
+                            <li style="color: black">{{ p.name }}</li>
+                            <hr style="visibility: hidden;">
+                            <li style="color: blue">{{ "{:,.0f}".format(p.gia) }} VNĐ</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </a>
         </div>
     </div>
 </div>
-
-
 {% endblock %}

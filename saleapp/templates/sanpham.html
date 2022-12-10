@@ -37,8 +37,9 @@
                 {% for x in sach %}
                 <div class="col-md-3 col-xs-12">
                     <div class="card">
-                        <a href="{{ url_for('chitiet', id_sp = x.id) }}"><img class="card-img-top" src="{{ url_for('static', filename=x.hinh_anh) }}"
-                                        alt="Card image"></a>
+                        <a href="{{ url_for('chitiet', id_sp = x.id) }}">
+                            <img class="card-img-top" src="{{ x.hinh_anh }}" alt="Card image">
+                        </a>
                         <div class="card-body">
                             <a href=""><h4 class="card-title" style="font-size: 15px;">{{ x.name }}</h4></a>
                             <p class="card-text">{{ "{:0,.1f}".format(x.gia) }} VNĐ</p>
