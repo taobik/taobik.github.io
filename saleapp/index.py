@@ -1,6 +1,6 @@
 from flask import session
-from saleapp import login, controller
-from saleapp.admin import *
+from saleapp import login, controller, app, utils
+from saleapp import admin
 
 
 app.add_url_rule("/", "home", controller.home)

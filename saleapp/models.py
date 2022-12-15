@@ -110,6 +110,66 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
 
+        u1 = User(name='truong linh', email='linh01653023898@gmail.com', so_dien_thoai=
+        '0985623320', username='taobik', password='taobik',
+                  avatar='https://res.cloudinary.com/dascseee2/image/upload/v1670516895/cld-sample-5.jpg', trang_thai=1,
+                  ngay_them='2022-12-03 18:38:41', vai_tro=UserRole.admin)
+        u2 = User(name='minh sang', email='linh01653023898@gmail.com', so_dien_thoai=
+        '0985623320', username='sangsang', password='sang',
+                  avatar='https://res.cloudinary.com/dascseee2/image/upload/v1670516893/cld-sample.jpg', trang_thai=1,
+                  ngay_them='2022-12-03 23:53:05', vai_tro=UserRole.normal_user)
+        db.session.add_all([u1, u2])
+        db.session.commit()
 
+        tg1 = TacGia(name='Tony Buổi Sáng')
+        tg2 = TacGia(name='Thân Hoàng Giang')
+        tg3 = TacGia(name='Nhiều Tác Giả')
+        tg4 = TacGia(name='Robert Greene')
+        tg5 = TacGia(name='Richard S. Tedlow')
+        tg6 = TacGia(name='Cao Minh')
 
+        db.session.add_all([tg1, tg2, tg3, tg4, tg5, tg6])
+        db.session.commit()
 
+        tl1 = TheLoai(name='Văn học')
+        tl2 = TheLoai(name='Tâm lý')
+        tl3 = TheLoai(name='Thiếu nhi')
+        tl4 = TheLoai(name='Kinh tế')
+
+        db.session.add_all([tl1, tl2, tl3, tl4])
+        db.session.commit()
+
+        nxb1 = NhaXuatBan(name='Trẻ', dia_chi='TP Hồ Chí Minh')
+        nxb2 = NhaXuatBan(name='Kim Đồng', dia_chi='TP Hồ Chí Minh')
+        nxb3 = NhaXuatBan(name='Hồng Đức', dia_chi='TP Hồ Chí Minh')
+        nxb4 = NhaXuatBan(name='Văn học', dia_chi='TP Hồ Chí Minh')
+        nxb5 = NhaXuatBan(name='Thanh Niên', dia_chi='TP Hồ Chí Minh')
+        nxb6 = NhaXuatBan(name='Thế Giới', dia_chi='TP Hồ Chí Minh')
+
+        db.session.add_all([nxb1, nxb2, nxb3, nxb4, nxb5, nxb6])
+        db.session.commit()
+
+        s1 = Sach(name='Trên Đường Băng (Tái Bản 2022)', gia=73000,
+                  hinh_anh='https://res.cloudinary.com/dascseee2/image/upload/v1670521998/trenduongbang_oh88do.jpg',
+                  trang_thai=1, da_ban=35, so_luong_ton=234, the_loai_id=1, tac_gia_id=1, nha_xuat_ban_id=1)
+        s2 = Sach(name='Vàng Xám Và Những Câu Chuyện Ngốc Nghếch', gia=108000,
+                  hinh_anh='https://res.cloudinary.com/dascseee2/image/upload/v1670521998/trenduongbang_oh88do.jpg',
+                  trang_thai=1, da_ban=175, so_luong_ton=221, the_loai_id=1, tac_gia_id=2, nha_xuat_ban_id=4)
+        s3 = Sach(name='Nghĩa Tình Miền Tây', gia=140000,
+                  hinh_anh='https://res.cloudinary.com/dascseee2/image/upload/v1670521998/trenduongbang_oh88do.jpg',
+                  trang_thai=1, da_ban=143, so_luong_ton=76, the_loai_id=1, tac_gia_id=3, nha_xuat_ban_id=5)
+        s4 = Sach(name='Pokémon Diamond & Pearl: Bá Vương Ảo Ảnh Zoroark', gia=20000,
+                  hinh_anh='https://res.cloudinary.com/dascseee2/image/upload/v1670521998/trenduongbang_oh88do.jpg',
+                  trang_thai=1, da_ban=64, so_luong_ton=238, the_loai_id=4, tac_gia_id=3, nha_xuat_ban_id=2)
+        s5 = Sach(name='33 Chiến Lược Của Chiến Tranh (Tái Bản 2021)', gia=70000,
+                  hinh_anh='https://res.cloudinary.com/dascseee2/image/upload/v1670521998/trenduongbang_oh88do.jpg',
+                  trang_thai=1, da_ban=90, so_luong_ton=50, the_loai_id=3, tac_gia_id=4, nha_xuat_ban_id=1)
+        s6 = Sach(name='Những Người Khổng Lồ Trong Giới Kinh Doanh', gia=100000,
+                  hinh_anh='https://res.cloudinary.com/dascseee2/image/upload/v1670521998/trenduongbang_oh88do.jpg',
+                  trang_thai=1, da_ban=164, so_luong_ton=322, the_loai_id=3, tac_gia_id=5, nha_xuat_ban_id=1)
+        s7 = Sach(name='Thiên Tài Bên Trái, Kẻ Điên Bên Phải (Tái Bản 2021', gia=120000,
+                  hinh_anh='https://res.cloudinary.com/dascseee2/image/upload/v1670521998/trenduongbang_oh88do.jpg',
+                  trang_thai=1, da_ban=236, so_luong_ton=276, the_loai_id=2, tac_gia_id=6, nha_xuat_ban_id=6)
+
+        db.session.add_all([s1, s2, s3, s4, s5, s6, s7])
+        db.session.commit()
