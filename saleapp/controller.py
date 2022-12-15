@@ -106,7 +106,7 @@ def dangxuat():
     return redirect(url_for('dangnhap'))
 
 
-def gio_hang():
+def cart():
     return render_template('giohang.html',
                            st=utils.cart_stats(session.get('cart')))
 

@@ -23,18 +23,20 @@ def load_sach(id=None, max=None, maxban=None, minban=None):
 
 
 def load_sp_by_id(id_sp):
-    return Sach.query.join(TheLoai, TheLoai.id == Sach.the_loai_id, isouter=True) \
-        .join(TacGia, TacGia.id == Sach.tac_gia_id) \
-        .join(NhaXuatBan, NhaXuatBan.id == Sach.nha_xuat_ban_id) \
-        .filter(Sach.id.__eq__(id_sp)) \
-        .add_columns(Sach.id, Sach.hinh_anh, Sach.gia, Sach.so_luong_ton, TheLoai.id, TheLoai.name, TacGia.name,
-                     NhaXuatBan.name).all()
+    with app.app_context():
+        return Sach.query.join(TheLoai, TheLoai.id == Sach.the_loai_id, isouter=True) \
+            .join(TacGia, TacGia.id == Sach.tac_gia_id) \
+            .join(NhaXuatBan, NhaXuatBan.id == Sach.nha_xuat_ban_id) \
+            .filter(Sach.id.__eq__(id_sp)) \
+            .add_columns(Sach.id, Sach.hinh_anh, Sach.gia, Sach.so_luong_ton, TheLoai.id, TheLoai.name, TacGia.name,
+                         NhaXuatBan.name).all()
 
 
 def load_tl():
-    return db.session.query(TheLoai.id, TheLoai.name, func.count(Sach.id)) \
-        .join(Sach, Sach.the_loai_id == TheLoai.id, isouter=True) \
-        .group_by(TheLoai.id, TheLoai.name).all()
+    with app.app_context():
+        return db.session.query(TheLoai.id, TheLoai.name, func.count(Sach.id)) \
+            .join(Sach, Sach.the_loai_id == TheLoai.id, isouter=True) \
+            .group_by(TheLoai.id, TheLoai.name).all()
 
 
 def load_dtthang_sp(kw=None, from_date=None, to_date=None):

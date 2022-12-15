@@ -10,7 +10,7 @@ app.add_url_rule("/dangky", "dangky", controller.dangky, methods=['get', 'post']
 app.add_url_rule("/danhnhap", "dangnhap", controller.dangnhap, methods=['get', 'post'])
 app.add_url_rule("/admin-login", "dangnhap_admin", controller.dangnhap_admin, methods=['post', 'get'])
 app.add_url_rule("/dangxuat", "dangxuat", controller.dangxuat)
-app.add_url_rule("/cart", "gio_hang", controller.gio_hang)
+app.add_url_rule("/cart", "cart", controller.cart)
 app.add_url_rule("/api/add-cart", "them_hang", controller.add_to_cart, methods=['post'])
 app.add_url_rule("/api/update-cart", "up_hang", controller.update_cart, methods=['put'])
 app.add_url_rule("/api/xoa_hang/<id_sp>", "xoa_hang", controller.xoa_hang, methods=['delete'])

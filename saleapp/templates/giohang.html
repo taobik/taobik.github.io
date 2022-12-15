@@ -1,7 +1,7 @@
 {% extends 'layout/base.html' %}
 {% block title %}Giỏ hàng{% endblock %}
 {% block body %}
-<h4>Giỏ Hàng</h4>
+<h4 style="text-align: center;">Giở hàng</h4>
 {% if 'cart' in session and session['cart'] %}
 <div class="container">
     <table class="table">
@@ -36,7 +36,7 @@
     {% if current_user.is_authenticated %}
     <input type="button" value="Thanh toán" class="btn btn-success" onclick="pay()">
     {% else %}
-    <a href="{{ url_for('dangnhap', next='gio_hang') }}">Đăng nhập </a> hoặc <a href="{{ url_for('dangky', next='gio_hang') }}">Đăng ký</a> để thanh toán!!
+    <a href="{{ url_for('dangnhap', next='cart') }}">Đăng nhập </a> hoặc <a href="{{ url_for('dangky', next='cart') }}">Đăng ký</a> để thanh toán!!
     {% endif %}
     <br><br>
     {% else %}
